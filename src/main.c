@@ -32,19 +32,18 @@ void run_shell()
         const char *line = readline();
         char **args = parseline(line);
 
-        int i = 0;
-        do
-        {
-            printf("%s\n", args[i]);
-        } while (args[++i] != NULL);
-
         // Execute the command
-        run = execute_command();
+        run = execute_command(args);
 
     } while (run);
 }
 
-bool execute_command()
+bool execute_command(char **args)
 {
+    int i = 0;
+    do
+    {
+        printf("%s\n", args[i]);
+    } while (args[++i] != NULL);
     return false;
 }
