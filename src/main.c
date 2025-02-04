@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "readline.h"
+
 void run_shell();
-void read_line();
 bool execute_command();
 
 int main(int argc, char *argv[])
@@ -23,17 +24,18 @@ void run_shell()
     bool run = true;
     do
     {
+
         // Show the prompt
         printf("$ ");
+
         // Read and parse input from the user
-        read_line();
+        const char *line = readline();
+        puts(line);
+
         // Execute the command
         run = execute_command();
-    } while (run);
-}
 
-void read_line()
-{
+    } while (run);
 }
 
 bool execute_command()
