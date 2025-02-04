@@ -30,7 +30,13 @@ void run_shell()
 
         // Read and parse input from the user
         const char *line = readline();
-        puts(line);
+        char **args = parseline(line);
+
+        int i = 0;
+        do
+        {
+            printf("%s\n", args[i]);
+        } while (args[++i] != NULL);
 
         // Execute the command
         run = execute_command();

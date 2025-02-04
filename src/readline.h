@@ -17,4 +17,15 @@
 ///       stderr and terminates the program with an exit status of EXIT_FAILURE.
 const char *readline();
 
+#define TOKEN_BUFFER_SIZE 64
+#define TOKEN_DELIMITERS " \r\n\t\a"
+
+/**
+ * Parses the given line into an array of strings.
+ *
+ * @param line The input line to be parsed.
+ * @return A NULL-terminated array of strings, where each string is a token from the input line.
+ */
+char **parseline(const char *line);
+
 #endif
