@@ -5,7 +5,7 @@
 #include "main.h"
 #include "readline.h"
 #include "commands/command.h"
-#include "program.h"
+#include "commands/program.h"
 
 int main(int argc, char *argv[])
 {
