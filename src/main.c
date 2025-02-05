@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "readline.h"
+#include "command.h"
 
 void run_shell();
 bool execute_command();
@@ -40,10 +41,23 @@ void run_shell()
 
 bool execute_command(char **args)
 {
-    int i = 0;
-    do
+    // If no command was passed, simply continue running the shell
+    if (args[0] == NULL)
     {
-        printf("%s\n", args[i]);
-    } while (args[++i] != NULL);
-    return false;
+        // Empty command; simply continue.
+        return true;
+    }
+
+    // Check to see if the command is builtin. If it is, execute it.
+    int cmd = get_builtin_cmd(args[0]);
+    if (cmd >= 0)
+    {
+        return execute_builtin(cmd, args);
+    }
+
+    // If we reach this point, the cmd was not found anywhere. Show a message and continue running the shell
+    printf("Unknown Command: %s\n", args[0]);
+
+    // Keep the shell alive
+    return true;
 }
