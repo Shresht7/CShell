@@ -5,6 +5,7 @@
 #include "main.h"
 #include "readline.h"
 #include "command.h"
+#include "program.h"
 
 int main(int argc, char *argv[])
 {
@@ -60,6 +61,12 @@ bool execute_command(char **args)
     if (cmd >= 0)
     {
         return execute_builtin(cmd, args);
+    }
+
+    bool status = execute_external(args);
+    if (status)
+    {
+        return true;
     }
 
     // If we reach this point, the cmd was not found anywhere. Show a message and continue running the shell
