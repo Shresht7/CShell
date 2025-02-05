@@ -65,8 +65,10 @@ char **parseline(char *line)
         exit(EXIT_FAILURE);
     }
 
-    int cursor = 0;                               // Cursor to keep track of our position in the tokens array
-    char *token = strtok(line, TOKEN_DELIMITERS); // Get the first token
+    int cursor = 0; // Cursor to keep track of our position in the tokens array
+
+    char *context;                                            // used to maintain the state of the string tokenization between successive calls to strtok_s. This allows us to safely tokenize the same string across multiple calls.
+    char *token = strtok_s(line, TOKEN_DELIMITERS, &context); // Get the first token
     while (token != NULL)
     {
         // Add the token to the tokens array
@@ -86,8 +88,8 @@ char **parseline(char *line)
             }
         }
 
-        // Get the next token
-        token = strtok(NULL, TOKEN_DELIMITERS);
+        // The context parameter ensures that the function can resume tokenization from where it left off in the previous call
+        token = strtok_s(NULL, TOKEN_DELIMITERS, &context);
     }
 
     tokens[cursor] = NULL; // Null-terminate the tokens array
