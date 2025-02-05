@@ -4,7 +4,7 @@
 
 #include "main.h"
 #include "readline.h"
-#include "command.h"
+#include "commands/command.h"
 #include "program.h"
 
 int main(int argc, char *argv[])
