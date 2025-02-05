@@ -34,6 +34,17 @@ int get_builtin_cmd(const char *cmd)
             // Return the index position of the command in the array
             return i;
         }
+        // Also check aliases if they exist.
+        if (builtins[i]->aliases != NULL)
+        {
+            for (int j = 0; builtins[i]->aliases[j] != NULL; j++)
+            {
+                if (strcmp(cmd, builtins[i]->aliases[j]) == 0)
+                {
+                    return i;
+                }
+            }
+        }
     }
     // ... Otherwise, if the command was not found
     return -1;
