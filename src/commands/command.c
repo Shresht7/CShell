@@ -48,9 +48,11 @@ bool execute_builtin(int idx, char **args)
 
 bool execute_cmd_help(char **args)
 {
-    printf("Built-in commands:\n");
-    printf("  echo - Echo the input back to the terminal\n");
-    printf("  help - Display this help message\n");
-    printf("  exit - Exit the shell\n");
+    printf("\nBuilt-in commands:\n");
+    for (int i = 0; i < num_builtins(); i++)
+    {
+        printf("  %s\n", builtins[i]->name);
+    }
+    printf("\n");
     return true;
 }
