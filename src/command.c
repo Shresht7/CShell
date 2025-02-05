@@ -9,7 +9,8 @@ BuiltinCommand builtins[] = {
     {"exit", cmd_exit},
     {"help", cmd_help},
     {"echo", cmd_echo},
-    {"pwd", cmd_pwd},
+    {"cwd", cmd_cwd},
+    {"pwd", cmd_cwd},
     {"cd", cmd_cd},
 };
 
