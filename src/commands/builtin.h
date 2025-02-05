@@ -8,6 +8,8 @@ typedef bool (*builtin_cmd)(char **args);
 typedef struct
 {
     char *name;       // The name of the command
+    char *desc;       // A helpful description
+    char **aliases;   // Aliases for the command
     builtin_cmd func; // The corresponding function to execute
 } BuiltinCommand;
 

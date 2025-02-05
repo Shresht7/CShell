@@ -24,6 +24,8 @@ bool execute_cmd_help(char **args);
 
 static BuiltinCommand cmd_help = {
     .name = "help",
+    .desc = "Shows the help message",
+    .aliases = (char *[]){NULL},
     .func = execute_cmd_help,
 };
 

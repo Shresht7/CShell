@@ -51,7 +51,7 @@ bool execute_cmd_help(char **args)
     printf("\nBuilt-in commands:\n");
     for (int i = 0; i < num_builtins(); i++)
     {
-        printf("  %s\n", builtins[i]->name);
+        printf("  %s\t%s\n", builtins[i]->name, builtins[i]->desc);
     }
     printf("\n");
     return true;
