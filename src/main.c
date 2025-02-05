@@ -2,11 +2,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "main.h"
 #include "readline.h"
 #include "command.h"
-
-void run_shell();
-bool execute_command();
 
 int main(int argc, char *argv[])
 {
