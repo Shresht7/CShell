@@ -25,7 +25,7 @@ void run_shell()
     {
 
         // Show the prompt
-        printf("$ ");
+        show_prompt();
 
         // Read and parse input from the user
         char *line = readline();
@@ -39,6 +39,11 @@ void run_shell()
         free(line);
 
     } while (run);
+}
+
+void show_prompt()
+{
+    printf("$ ");
 }
 
 bool execute_command(char **args)
