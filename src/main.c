@@ -28,7 +28,7 @@ void run_shell()
         printf("$ ");
 
         // Read and parse input from the user
-        const char *line = readline();
+        char *line = readline();
         char **args = parseline(line);
 
         // Execute the command

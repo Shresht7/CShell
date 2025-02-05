@@ -5,7 +5,7 @@
 
 #include "readline.h"
 
-const char *readline()
+char *readline()
 {
     int buffer_size = BUFFER_SIZE; // Mutable local variable for when we need to resize/reallocate
 
@@ -52,7 +52,7 @@ const char *readline()
     }
 }
 
-char **parseline(const char *line)
+char **parseline(char *line)
 {
     int buffer_size = TOKEN_BUFFER_SIZE; // Mutable local variable for when we need to resize/reallocate
 

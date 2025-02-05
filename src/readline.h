@@ -15,7 +15,7 @@
 ///
 /// @note If memory allocation fails, the function prints an error message to
 ///       stderr and terminates the program with an exit status of EXIT_FAILURE.
-const char *readline();
+char *readline();
 
 #define TOKEN_BUFFER_SIZE 64
 #define TOKEN_DELIMITERS " \r\n\t\a"
@@ -26,6 +26,6 @@ const char *readline();
  * @param line The input line to be parsed.
  * @return A NULL-terminated array of strings, where each string is a token from the input line.
  */
-char **parseline(const char *line);
+char **parseline(char *line);
 
 #endif
