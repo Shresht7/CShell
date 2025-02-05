@@ -3,12 +3,22 @@
 #include <stdbool.h>
 #include <string.h>
 
+#ifdef _WIN32
+#include <direct.h>
+#define getcwd _getcwd
+#define chdir _chdir
+#else
+#include <unistd.h>
+#endif
+
 #include "command.h"
 
 BuiltinCommand builtins[] = {
     {"exit", cmd_exit},
     {"help", cmd_help},
     {"echo", cmd_echo},
+    {"pwd", cmd_pwd},
+    {"cd", cmd_cd},
 };
 
 // Get the number of builtins.
@@ -62,5 +72,35 @@ bool cmd_help(char **args)
     printf("  echo - Echo the input back to the terminal\n");
     printf("  help - Display this help message\n");
     printf("  exit - Exit the shell\n");
+    return true;
+}
+
+bool cmd_pwd(char **args)
+{
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+    {
+        printf("%s\n", cwd);
+    }
+    else
+    {
+        perror("CShell");
+    }
+    return true;
+}
+
+bool cmd_cd(char **args)
+{
+    if (args[1] == NULL)
+    {
+        fprintf(stderr, "CShell: expected argument\n");
+    }
+    else
+    {
+        if (chdir(args[1]) != 0)
+        {
+            perror("CShell");
+        }
+    }
     return true;
 }

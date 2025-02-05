@@ -37,4 +37,10 @@ bool cmd_echo(char **args);
 /// @brief Shows a help message about the shell
 bool cmd_help(char **args);
 
+/// @brief Shows the present working directory
+bool cmd_pwd(char **args);
+
+/// @brief Change Directory
+bool cmd_cd(char **args);
+
 #endif
