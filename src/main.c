@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #include "main.h"
-#include "readline.h"
+#include "readline/readline.h"
 #include "commands/command.h"
 #include "commands/program.h"
 
