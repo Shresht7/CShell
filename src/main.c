@@ -4,6 +4,7 @@
 
 #include "main.h"
 #include "readline/readline.h"
+#include "readline/parseline.h"
 #include "commands/command.h"
 #include "commands/program.h"
 
