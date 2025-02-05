@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "program.h"
 
@@ -19,15 +20,16 @@ bool execute_external(char **args)
     intptr_t ret = _spawnvp(_P_WAIT, args[0], args);
     if (ret == -1)
     {
-        // If the _spawnvp fails, print an error message
         perror("CShell");
+        return false; // Indicate failure.
     }
+    return true;
 #else
-    // On Unix-like systems, we use fork() and execvp() to execute a program
     pid_t pid = fork(); // Create/Fork a new process
     if (pid < 0)
     {
         perror("CShell: fork error");
+        return false;
     }
     else if (pid == 0)
     { // Child process
@@ -41,12 +43,23 @@ bool execute_external(char **args)
     }
     else
     { // Parent process: Wait for the child-process to finish
+        int status = 0;
+        pid_t wpid;
         do
         {
             wpid = waitpid(pid, &status, WUNTRACED);
+            if (wpid == -1)
+            {
+                perror("CShell: waitpid error");
+                return false;
+            }
         } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+        // Check the exit status: if nonzero, assume failure.
+        if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+        {
+            return false;
+        }
     }
-#endif
-    // Return true to indicate successful execution
     return true;
+#endif
 }

@@ -63,14 +63,12 @@ bool execute_command(char **args)
         return execute_builtin(cmd, args);
     }
 
-    bool status = execute_external(args);
-    if (status)
+    // Try to execute it as an external command.
+    if (!execute_external(args))
     {
-        return true;
+        // If we couldn't run this as a builtin or as an external program, then show a message
+        printf("Unknown Command: %s\n", args[0]);
     }
-
-    // If we reach this point, the cmd was not found anywhere. Show a message and continue running the shell
-    printf("Unknown Command: %s\n", args[0]);
 
     // Keep the shell alive
     return true;
