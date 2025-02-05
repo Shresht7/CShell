@@ -44,17 +44,6 @@ bool execute_builtin(int idx, char **args)
     return builtins[idx].func(args);
 }
 
-bool cmd_echo(char **args)
-{
-    int i = 1;
-    do
-    {
-        printf("%s ", args[i]);
-    } while (args[++i] != NULL);
-    printf("\n");
-    return true;
-}
-
 bool cmd_help(char **args)
 {
     printf("Built-in commands:\n");
