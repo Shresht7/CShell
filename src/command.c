@@ -7,6 +7,7 @@
 
 BuiltinCommand builtins[] = {
     {"exit", cmd_exit},
+    {"quit", cmd_exit},
     {"help", cmd_help},
     {"echo", cmd_echo},
     {"cwd", cmd_cwd},
@@ -41,11 +42,6 @@ bool execute_builtin(int idx, char **args)
 {
     // Call the corresponding function.
     return builtins[idx].func(args);
-}
-
-bool cmd_exit(char **args)
-{
-    return false; // Propagate the result up to affect loop continuity
 }
 
 bool cmd_echo(char **args)
