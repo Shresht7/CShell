@@ -4,30 +4,32 @@
 #include <string.h>
 
 #include "command.h"
+#include "cd.h"
+#include "cwd.h"
+#include "echo.h"
+#include "exit.h"
 
-BuiltinCommand builtins[] = {
-    {"exit", cmd_exit},
-    {"quit", cmd_exit},
-    {"help", cmd_help},
-    {"echo", cmd_echo},
-    {"cwd", cmd_cwd},
-    {"pwd", cmd_cwd},
-    {"cd", cmd_cd},
+BuiltinCommand *builtins[] = {
+    &cmd_exit,
+    &cmd_help,
+    &cmd_echo,
+    &cmd_cwd,
+    &cmd_cd,
 };
 
 // Get the number of builtins.
 int num_builtins()
 {
-    return sizeof(builtins) / sizeof(BuiltinCommand);
+    return sizeof(builtins) / sizeof(BuiltinCommand *);
 }
 
-int get_builtin_cmd(char *cmd)
+int get_builtin_cmd(const char *cmd)
 {
     // Iterate through the builtin commands table...
     for (int i = 0; i < num_builtins(); i++)
     {
         // If the name of the command matches...
-        if (strcmp(cmd, builtins[i].name) == 0)
+        if (strcmp(cmd, builtins[i]->name) == 0)
         {
             // Return the index position of the command in the array
             return i;
@@ -41,10 +43,10 @@ int get_builtin_cmd(char *cmd)
 bool execute_builtin(int idx, char **args)
 {
     // Call the corresponding function.
-    return builtins[idx].func(args);
+    return builtins[idx]->func(args);
 }
 
-bool cmd_help(char **args)
+bool execute_cmd_help(char **args)
 {
     printf("Built-in commands:\n");
     printf("  echo - Echo the input back to the terminal\n");

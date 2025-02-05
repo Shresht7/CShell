@@ -1,15 +1,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-/// Function prototype for the builtin commands function
-typedef bool (*builtin_cmd)(char **args);
-
-/// @brief Maps a command-name to its corresponding builtin function
-typedef struct
-{
-    char *name;       // The name of the command
-    builtin_cmd func; // The corresponding function to execute
-} BuiltinCommand;
+#include "builtin.h"
 
 // COMMANDS
 // --------
@@ -20,7 +12,7 @@ int num_builtins();
 /// @brief Finds the given cmd name in the builtin commands table and returns its index.
 /// @param cmd The name of the command to lookup
 /// @returns The index of the given command. -1 if the command was not found.
-int get_builtin_cmd(char *cmd);
+int get_builtin_cmd(const char *cmd);
 
 /// @brief Executes the builtin command corresponding to the given index
 /// @param idx The index of the builtin command to execute
@@ -28,19 +20,11 @@ int get_builtin_cmd(char *cmd);
 /// @return A boolean indicating whether the shell should continue running
 bool execute_builtin(int idx, char **args);
 
-/// @brief Exit the shell
-bool cmd_exit(char **args);
+bool execute_cmd_help(char **args);
 
-/// @brief Echo the input back
-bool cmd_echo(char **args);
-
-/// @brief Shows a help message about the shell
-bool cmd_help(char **args);
-
-/// @brief Shows the present working directory
-bool cmd_cwd(char **args);
-
-/// @brief Change Directory
-bool cmd_cd(char **args);
+static BuiltinCommand cmd_help = {
+    .name = "help",
+    .func = execute_cmd_help,
+};
 
 #endif

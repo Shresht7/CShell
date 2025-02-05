@@ -33,8 +33,6 @@ char *get_home()
     return home;
 }
 
-bool cmd_cd(char **args)
-
 /// @brief Changes the current working directory.
 ///
 /// If no argument is provided or the argument is "~", changes the directory to the user's home directory.
@@ -42,6 +40,7 @@ bool cmd_cd(char **args)
 ///
 /// @param args An array of arguments where args[1] is the directory to change to.
 /// @return true if the directory change is successful, otherwise prints an error message.
+bool execute_cmd_cd(char **args)
 {
     char *home = get_home();
     if (args[1] == NULL || strcmp(args[1], "~") == 0)

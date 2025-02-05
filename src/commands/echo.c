@@ -12,7 +12,7 @@
 ///             The first element (args[0]) is typically the command name ("echo").
 ///             The function starts printing from args[1].
 /// @return true Always returns true indicating the command executed successfully.
-bool cmd_echo(char **args)
+bool execute_cmd_echo(char **args)
 {
     int i = 1;
     do

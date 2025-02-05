@@ -17,7 +17,7 @@
 ///
 /// @param args Unused parameter.
 /// @return Always returns true.
-bool cmd_cwd(char **args)
+bool execute_cmd_cwd(char **args)
 {
     char cwd[1024];
     if (getcwd(cwd, sizeof(cwd)) != NULL)
