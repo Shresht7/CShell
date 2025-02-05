@@ -36,6 +36,10 @@ void run_shell()
         // Execute the command
         run = execute_command(args);
 
+        // Free allocated memory
+        free(args);
+        free(line);
+
     } while (run);
 }
 
