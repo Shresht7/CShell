@@ -6,9 +6,13 @@
 /// This function terminates the program by calling the `exit` function with
 /// `EXIT_SUCCESS` status. It does not use the `args` parameter.
 ///
-/// @param args Unused parameter.
+/// @param args The arguments passed in to the command. The first argument is the status code
 /// @return This function does not return.
 bool cmd_exit(char **args)
 {
+    if (args[1] != NULL)
+    {
+        exit(atoi(args[1]));
+    }
     exit(EXIT_SUCCESS);
 }
